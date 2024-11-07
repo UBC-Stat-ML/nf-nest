@@ -1,8 +1,9 @@
 params.nPrecompileThreads = 10
 params.packagesToAdd = "" // comma separated
 
-// Note: this will only work if passing the directory. 
+// Note: need to pass a directory to make it easy to use interactively 
 julia_env = file('julia_env')
+julia_env.mkdir()
 
 // Can use this as utility to add packages and precompile it
 // example: ./nextflow run pkg.nf --packagesToAdd "CSV, DataFrames"
@@ -18,7 +19,6 @@ process instantiate_process {
     input: 
         path julia_env
         val packages
-
     output:
         path julia_env
 
