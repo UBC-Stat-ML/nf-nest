@@ -21,6 +21,9 @@ workflow {
 
 process run_julia {
     debug true
+    time 1.min
+    cpus 1 
+    memory 1.GB
     input:
         path julia_env 
         val config 
