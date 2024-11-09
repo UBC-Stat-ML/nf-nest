@@ -2,7 +2,7 @@
 include { crossProduct } from '../cross.nf'
 include { instantiate; precompile; activate } from '../pkg.nf'
 
-def julia_env = file('julia_env')
+def julia_env = file(projectDir/'julia_env')
 
 def variables = [
     first: 1..3,
