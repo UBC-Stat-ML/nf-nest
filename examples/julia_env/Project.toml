@@ -1,3 +1,4 @@
 [deps]
 BridgeStan = "c88b6f0a-829e-4b0b-94b7-f06ab5908f5a"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 Pigeons = "0eb8d820-af6a-4919-95ae-11206f830c31"
