@@ -17,7 +17,7 @@ process instantiate_process {
     scratch false // we want changes in Manifest.toml to be saved
     input: 
         path julia_env
-        path toml // needed for right behaviour under updates
+        path toml // needed for correct cache behaviour under updates
     output:
         path julia_env
 
