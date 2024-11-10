@@ -9,11 +9,15 @@ workflow  {
     instantiate(julia_env) | precompile
 }
 
-process instantiate {
+def instantiate(julia_env) { instantiate_process(julia_env, file(julia_env/"Manifest.toml"))}
+
+process instantiate_process {
+    cache 'deep'
     executor 'local' // we need internet access
     scratch false // we want changes in Manifest.toml to be saved
     input: 
         path julia_env
+        path toml // needed for right behaviour under updates
     output:
         path julia_env
 

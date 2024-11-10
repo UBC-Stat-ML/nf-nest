@@ -19,14 +19,14 @@ process combine_process {
         path julia_env 
         path results
     output:
-        path '*.csv'
+        path 'output'
     """ 
     ${activate(julia_env)}
 
     using CSV 
     using CombineCSVs
 
-    df = combine_csvs(".")
-    CSV.write("combined.csv", df)
+    mkdir("output")
+    combine_csvs(".", "output")
     """
 }

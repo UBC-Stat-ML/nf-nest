@@ -1,14 +1,13 @@
 // includes are relative to the .nf file, should always start with ./ or ../
-include { crossProduct; auto_name } from '../cross.nf'
+include { crossProduct; filed } from '../cross.nf'
 include { instantiate; precompile; activate } from '../pkg.nf'
 include { combine_csvs; } from '../combine.nf'
-
 
 def julia_env = file(projectDir/'julia_env')
 
 def variables = [
-    seed: 1..3,
-    n_chains: 1..3, 
+    seed: 1..2,
+    n_chains: 2..3, 
 ]
 
 workflow {
@@ -18,21 +17,28 @@ workflow {
 }
 
 process run_julia {
-    time 1.min
-    cpus 1 
-    memory 1.GB
     input:
         path julia_env 
         val config 
     output:
-        path "*.csv"
+        path "${filed(config)}"
     """
     ${activate(julia_env)}
 
+    # run your code
     using Pigeons 
     using CSV 
+    pt = pigeons(
+            target = toy_mvn_target(1000), 
+            n_chains = ${config.n_chains}, 
+            seed = ${config.seed})
 
-    pt = pigeons(target = toy_mvn_target(1000))
-    CSV.write("${auto_name(config)}", pt.shared.reports.summary)
+    # organize output as follows:
+    #   - create a directory with name controlled by filed(config)
+    #     to keep track of input configuration
+    #   - put any number of CSV in there
+    mkdir("${filed(config)}")
+    CSV.write("${filed(config)}/summary.csv", pt.shared.reports.summary)
+    CSV.write("${filed(config)}/swap_prs.csv", pt.shared.reports.swap_prs)
     """
 }

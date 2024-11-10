@@ -1,5 +1,5 @@
 // includes are relative to the .nf file, should always start with ./ or ../
-include { crossProduct; auto_name } from '../cross.nf'
+include { crossProduct; filed } from '../cross.nf'
 include { instantiate; precompile; activate } from '../pkg.nf'
 
 def julia_env = file(projectDir/'julia_env')

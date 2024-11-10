@@ -1,5 +1,5 @@
-def auto_name(config) {
-    config.collect{key, value -> "$key=$value"}.join("___") + ".csv"
+def filed(config) {
+    return config.collect{key, value -> "$key=$value"}.join("___") 
 }
 
 def crossProduct(Map<String, List<?>> mapOfLists, boolean dryRun) {
