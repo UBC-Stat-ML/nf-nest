@@ -2,4 +2,4 @@
 work/*
 .nextflow.log*
 nextflow
-julia_env/*
+deliverables/*

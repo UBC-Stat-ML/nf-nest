@@ -1,19 +1,23 @@
 // includes are relative to the .nf file, should always start with ./ or ../
-include { crossProduct; filed } from '../cross.nf'
+include { crossProduct; filed; deliverables } from '../cross.nf'
 include { instantiate; precompile; activate } from '../pkg.nf'
 include { combine_csvs; } from '../combine.nf'
 
-def julia_env = file(projectDir/'julia_env')
+// in contrast, file(..) is relative to `pwd`, use projectDir/ 
+//   to make it relative to main .nf file, or moduleDir for the .nf file
+def julia_env = file(moduleDir/'julia_env')
+def plot_script = file(moduleDir/'plot.jl')
 
 def variables = [
-    seed: 1..2,
-    n_chains: 2..3, 
+    seed: 1..10,
+    n_chains: [10, 20], 
 ]
 
 workflow {
     compiled_env = instantiate(julia_env) | precompile
     configs = crossProduct(variables)
-    run_julia(compiled_env, configs) | combine_csvs
+    combined = run_julia(compiled_env, configs) | combine_csvs
+    plot(compiled_env, plot_script, combined)
 }
 
 process run_julia {
@@ -40,5 +44,22 @@ process run_julia {
     mkdir("${filed(config)}")
     CSV.write("${filed(config)}/summary.csv", pt.shared.reports.summary)
     CSV.write("${filed(config)}/swap_prs.csv", pt.shared.reports.swap_prs)
+    """
+}
+
+process plot {
+    input:
+        path julia_env 
+        path plot_script
+        path combined_csvs_folder 
+    output:
+        path '*.png'
+        path combined_csvs_folder
+    publishDir "${deliverables(workflow, params)}", mode: 'copy', overwrite: true
+    """
+    ${activate(julia_env)}
+
+    include("$plot_script")
+    create_plots("$combined_csvs_folder")
     """
 }

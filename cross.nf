@@ -2,6 +2,15 @@ def filed(config) {
     return config.collect{key, value -> "$key=$value"}.join("___") 
 }
 
+def deliverables(workflow, workflow_params) { 
+    def properties = [
+        scriptName: workflow.scriptName,
+        runName: workflow.runName,
+    ]
+    properties.putAll(workflow_params)
+    return file("deliverables/" + filed(properties))
+}
+
 def crossProduct(Map<String, List<?>> mapOfLists, boolean dryRun) {
     if (dryRun) {
         def result = [:]
