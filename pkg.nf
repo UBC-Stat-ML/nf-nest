@@ -50,3 +50,7 @@ process precompile {
 def activate(julia_env, nThreads = 1) {
     return "#!/usr/bin/env julia --threads=${nThreads} --project=$julia_env"
 }
+
+def activate() {
+    return "#!/usr/bin/env julia --threads=1"
+}
