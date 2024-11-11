@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
     echo "  The first matching will have its directory passed to 'open'" 
     echo "  The following processes are available:"
     ./nextflow log $last_exec_name -f name,workdir,status | sed 's/ [(]/_/' | sed 's/[)]//' | sort
-    exit 1
+    exit 0
 fi
 pattern=$1
 
