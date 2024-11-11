@@ -24,7 +24,7 @@ version = "0.7.6"
 
 [[deps.CombineCSVs]]
 deps = ["CSV", "DataFrames"]
-git-tree-sha1 = "4bfe5211142b9048c6b79dff5038639fa1181a3e"
+git-tree-sha1 = "e198b968561aaf068fdd92787030bd492b425bd7"
 repo-rev = "main"
 repo-url = "https://github.com/UBC-Stat-ML/CombineCSVs"
 uuid = "aaddf6af-71a4-4d09-b7ba-6d4d56e1789b"
