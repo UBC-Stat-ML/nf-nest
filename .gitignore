@@ -3,3 +3,6 @@ work/*
 .nextflow.log*
 nextflow
 deliverables/*
+dag.html
+report.html
+timeline.html
