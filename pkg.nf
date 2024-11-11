@@ -12,7 +12,6 @@ workflow  {
 def instantiate(julia_env) { instantiate_process(julia_env, file(julia_env/"Manifest.toml"))}
 
 process instantiate_process {
-    cache 'deep'
     executor 'local' // we need internet access
     scratch false // we want changes in Manifest.toml to be saved
     input: 
