@@ -11,6 +11,7 @@ def variables = [
 ]
 
 workflow {
+    
     // prepare Julia env
     compiled_env = instantiate(julia_env) | precompile
     // look at all combinations of variables
