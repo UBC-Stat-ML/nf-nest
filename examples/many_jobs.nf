@@ -24,9 +24,9 @@ process run_julia {
     debug true // by default, standard out is not shown, use this to show it
     
     // information used when submitting job to queue
-    time 1.min
+    time 2.min
     cpus 1 
-    memory 1.GB
+    memory 5.GB
 
     input:
         val config 
