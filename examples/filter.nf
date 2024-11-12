@@ -11,10 +11,11 @@ def variables = [
 
 // specifies the order of operations
 workflow {
-    // look at all combinations of variables
     configs = crossProduct(variables).filter{ config -> config.first == config.second }
-    // run Julia on 18 nodes!
     run_julia(configs)
+
+    // equivalent pipe syntax:
+    // crossProduct(variables) | filter{ config -> config.first == config.second } | run_julia
 }
 
 process run_julia {
