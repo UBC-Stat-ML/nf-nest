@@ -17,6 +17,16 @@ process run_julia {
 
     using CUDA 
 
+    println("CPU")
+    x = rand(5000, 5000);
+    @time x * x;
+    @time x * x;
+
+    println("GPU")
+    x = CUDA.rand(5000, 5000);
+    @time x * x;
+    @time x * x;
+
     CUDA.versioninfo()
     """
 }
