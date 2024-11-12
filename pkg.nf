@@ -1,7 +1,7 @@
 params.nPrecompileThreads = 10
 
-// Note: need to pass a directory to make it easy to use interactively 
-julia_env = file('julia_env')
+params.julia_env = 'julia_env'
+julia_env = file(params.julia_env)
 julia_env.mkdir()
 
 // Can be used as standalone, but typically used inside a user nf file
