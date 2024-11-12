@@ -7,8 +7,6 @@ process compile_stan {
         path "${stan_file.baseName}"
         
     """
-    echo $stan_file
-
     # name of stan file without extension
     base_name=`basename $stan_file .stan`
 
