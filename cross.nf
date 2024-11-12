@@ -53,4 +53,6 @@ def check(_key, _value) {
         throw new Exception("Keys and values should not contain '___' but got: $key, $value")
     if (key.contains("="))
         throw new Exception("Keys should not contain '=' but got: $key")
+    if (key.contains("/") || value.contains("/"))
+        throw new Exception("Keys and values should not contain '/' but got: $key, $value")   
 }
