@@ -5,10 +5,15 @@ def filed(config) {
 def deliverables(workflow, workflow_params) { 
     def properties = [
         scriptName: workflow.scriptName,
-        runName: workflow.runName,
     ]
     properties.putAll(workflow_params)
-    return file("deliverables/" + filed(properties))
+    def result = file("deliverables/" + filed(properties))
+
+    // add the runName inside a text file
+    result.mkdirs()
+    def runNameFile = file(result/"runName.txt") 
+    runNameFile.text = workflow.runName
+    return result
 }
 
 def crossProduct(Map<String, List<?>> mapOfLists, boolean dryRun) {
