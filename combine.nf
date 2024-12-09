@@ -27,6 +27,6 @@ process combine_process {
     using CombineCSVs
 
     mkdir("output")
-    combine_csvs(".", "output")
+    combine_csvs(".", "output"; comment = "#")
     """
 }
