@@ -48,9 +48,9 @@ process precompile {
 // Start Julia and with the provided environment and optionally, number of threads (1 by default) 
 // Needs to be the very first line of the process script
 def activate(julia_env, nThreads = 1) {
-    return "#!/usr/bin/env julia --threads=${nThreads} --compiled-modules=existing --project=$julia_env"
+    return "#!/usr/bin/env julia --threads=${nThreads} --project=$julia_env"
 }
 
 def activate() {
-    return "#!/usr/bin/env julia --threads=1 --compiled-modules=existing"
+    return "#!/usr/bin/env julia --threads=1"
 }
