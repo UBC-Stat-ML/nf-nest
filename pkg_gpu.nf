@@ -17,7 +17,7 @@ process precompile_gpu {
         path julia_env
     output:
         path julia_env
-    memory 15.GB
+    memory 30.GB
     """
     ${activate(julia_env)}
 
